@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Avg, Max, Min
-from .models import Gigs
+from .models import Gig
 import time
 from .forms import *
 from django.contrib.auth import login, logout, authenticate
@@ -24,7 +24,7 @@ def get_landing_page(request):
 
 # @login_required(login_url='user_login')
 def buying_view(request):
-    gigs = Gigs.objects.filter(is_publish=True).order_by('-gig_click_count')
+    gigs = Gig.objects.all().order_by('id')
 
     args = {
         'gigs': gigs
@@ -33,7 +33,7 @@ def buying_view(request):
 
 # @login_required(login_url='user_login')
 def gig_details(request, gig_slug):
-    gigs = Gigs.objects.filter(gig_slug=gig_slug).first()
+    gigs = Gig.objects.filter(gig_slug=gig_slug).first()
 
 
 
@@ -66,7 +66,7 @@ def gig_details(request, gig_slug):
         'gigs': gigs,
         'c': c
     }
-    return render(request, 'gigview/gig_details.html', args)
+    return render(request, 'buyingview/gig_details.html', args)
 
 
 def user_registration(request):
@@ -108,3 +108,13 @@ def seller_profile(request):
     return render(request, 'accountview/seller.html')
 
 
+def serviceWisegig(request, id):
+    servs = Services.objects.all()
+    gigs = Gig.objects.filter(service_id=id)
+    
+    args = {
+        'servs': servs,
+        'gigs': gigs
+    }
+    
+    return render(request, 'buyingview/service_wise_gig.html', args)

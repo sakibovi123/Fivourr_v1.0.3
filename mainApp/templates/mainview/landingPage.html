@@ -127,7 +127,7 @@
             {% for s in services %}
           <div class="col cardColumn">
             <div class="card text-center">
-              <a href="#"><img src="{{ s.img.url }}" class="card-img" alt="..."></a>
+              <a href="{% url 'serviceWisegig' s.id %}"><img src="{{ s.img.url }}" class="card-img" alt="..."></a>
             </div>
 
             <div class="textOnCard text-white">

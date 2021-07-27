@@ -39,7 +39,13 @@ urlpatterns = [
     ## Seller Profile View URL
 
     path('seller_profile/', views.seller_profile, name="seller_profile"),
+    
+    ## ServiceWise Gig
+    
+    path('service_wise_gig/<int:id>/', views.serviceWisegig, name="serviceWisegig"),
 ]
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
